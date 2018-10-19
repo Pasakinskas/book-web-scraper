@@ -1,6 +1,6 @@
 package com.pasakinskas;
 
-public class Book {
+public class Book extends BookListing {
     private String title;
     private String author;
     private String genre;
@@ -8,9 +8,9 @@ public class Book {
     private boolean isHardcover;
     private String ISBN;
 
-    public Book(String title, String author, String genre,
-                int noOfPages, boolean isHardcover, String ISBN) {
-        this.title = title;
+    public Book(double price, int discount, String link, String title, String author,
+                String genre, int noOfPages, boolean isHardcover, String ISBN) {
+        super(price, discount, title, link);
         this.author = author;
         this.genre = genre;
         this.noOfPages = noOfPages;
@@ -23,7 +23,7 @@ public class Book {
                 "Author: " + author + ";\n" +
                 "genre: " + genre + ";\n" +
                 "Number of pages: " + noOfPages + ";\n" +
-                "Hardcover?: " + isHardcover + ";\n" +
+                "Is hardcover: " + isHardcover + ";\n" +
                 "ISBN: " + ISBN + ";\n";
     }
 }

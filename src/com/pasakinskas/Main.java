@@ -9,20 +9,20 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        init();
+        init(5, 10, 10, "discountdesc");
     }
 
-    public static void init() throws IOException {
-        Document doc = Scraper.scrapeBooks();
+    public static void init(int booksToSelect, int discount, int price, String sortType) throws IOException {
+        Document doc = Scraper.scrapeBooks(sortType);
         Elements scrapedElements = doc.select("div.product-in-list");
         ArrayList<BookListing> bookListings = BookListing.getBookListings(scrapedElements);
 
         int booksSelected = 0;
         for (BookListing bookListing : bookListings) {
-            if (booksSelected >= 3) {
+            if (booksSelected >= booksToSelect) {
                 break;
             }
-            if (bookListing.getPrice() < 15 && bookListing.getDiscount() > 20) {
+            if (bookListing.getPrice() < price && bookListing.getDiscount() > discount) {
                 Book book = bookListing.toBook();
                 System.out.println(book);
                 booksSelected++;

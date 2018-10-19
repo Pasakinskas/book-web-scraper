@@ -64,14 +64,14 @@ public class BookListing {
     public Book toBook() throws IOException {
         Document doc = Scraper.scrapeDetailedBook(link);
 
-        String title = doc.select("h1.bookTitle > span[itemprop=name]").text();
         String author = doc.select("p.book_details > a").text();
         String genre = doc.select("ul.link-list > li").first().text();
         int noOfPages = Integer.parseInt(doc.select("p.book_details > span[itemprop=numberOfPages]").text());
         boolean isHardcover = doc.select("p.book_details").toString().contains("kieti");
         String ISBN = doc.select("p.book_details > span[itemprop=isbn]").text();
 
-        return new Book(title, author, genre, noOfPages, isHardcover, ISBN);
+        return new Book(this.price, this.discount, this.link, this.title,
+                author, genre, noOfPages, isHardcover, ISBN);
     }
 
     public double getPrice() {
